@@ -1,14 +1,19 @@
 from tkinter import *
 from tkinter import messagebox
 import requests
+from dotenv import load_dotenv
 import os
 
 
+def configure():
+    load_dotenv()
+
 
 def get_weather(city):
+    configure()
     city = city_entry.get()
     params = {"q": city,
-    "appid": os.environ["OWM_API_KEY"]
+    "appid": os.getenv("OWM_API_KEY")
     }
     weather = requests.get(url="https://api.openweathermap.org/data/2.5/weather", params=params)
     if weather:
